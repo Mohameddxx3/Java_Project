@@ -34,5 +34,8 @@ public class JavaProject extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        System.out.println("mhmd ibrahim");
+        System.out.println("mhmd ibrahim2");
+        System.out.println("mhmd ibrahim3");
     }
 }
