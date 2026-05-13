@@ -9,9 +9,19 @@ public class PhysicalProduct extends Product {
     protected String brand;
     
     public PhysicalProduct(){};
+
+    public PhysicalProduct(double weight, double shippingCost, String brand, int id, String name, double price, Discount discount, String description, int quantity) {
+        super(id, name, price, discount, description, quantity);
+        this.weight = weight;
+        this.shippingCost = shippingCost;
+        this.brand = brand;
+    }
+    
+    
+    
     
     public double calculateShipping(){
-    //
+    
         return 0;
     }
 

@@ -10,6 +10,7 @@ public abstract class Product {
     protected int quantity;
    
     public Product(){}
+    
     public Product(int id, String name, double price, Discount discount, String description, int quantity) {
         this.id = id;
         this.name = name;
