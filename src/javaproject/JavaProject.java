@@ -17,7 +17,7 @@ public class JavaProject extends Application {
         // eladly 1
         //mhmd 
         //mhmd
-        //
+        //هلا
     }
         //
     public static void main(String[] args) {
