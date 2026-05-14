@@ -6,7 +6,7 @@ public abstract class DigitalProduct extends Product {
     
     protected double fileSize;
     protected String downloadLink;
-public DigitalProduct(){};
+
     public DigitalProduct(double fileSize, String downloadLink, int id,
             String name, double price, Discount discount,
             String description, int quantity) {

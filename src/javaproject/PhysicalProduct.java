@@ -8,7 +8,7 @@ public abstract class PhysicalProduct extends Product implements Taxable,Shippab
     protected double shippingCost;
     protected String brand;
     
-    public PhysicalProduct(){}
+ 
 
     public PhysicalProduct(double weight, double shippingCost, String brand,
             int id, String name, double price, Discount discount, String description, int quantity) {
