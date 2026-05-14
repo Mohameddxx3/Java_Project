@@ -3,5 +3,27 @@ package javaproject;
 
 
 public class DigitalDownload extends DigitalProduct {
+
+    protected String format;
+    protected int downloadLimit;
+
+    public DigitalDownload(String format, int downloadLimit, double fileSize, String downloadLink,
+            int id, String name, double price, Discount discount, String description, int quantity) {
+        super(fileSize, downloadLink, id, name, price, discount, description, quantity);
+        this.format = format;
+        this.downloadLimit = downloadLimit;
+    }
+    
+     @Override
+    public void download() {
+
+    if(downloadLimit > 0){
+        System.out.println("Downloading...");
+        downloadLimit--;
+    }
+    else{
+        System.out.println("Download limit reached");
+    }
+} 
     
 }

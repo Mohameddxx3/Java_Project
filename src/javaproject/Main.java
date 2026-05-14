@@ -1,6 +1,8 @@
 
 package javaproject;
 
+import java.time.LocalDate;
+
 
 
 public class Main {
@@ -50,5 +52,50 @@ public class Main {
                     1300, null, "Apple phone", 12, 48, 4500);
 
       
+            // =========================
+            // 💻 SOFTWARE LICENSE OBJECTS
+            // =========================
+
+            // licenseKey, expiryDate, fileSize, downloadLink, id, name,
+            // price, discount, description, quantity
+
+            SoftwareLicense s1 = new SoftwareLicense(
+                    "ABC123-XYZ789",
+                    LocalDate.of(2027, 5, 14),
+                    2.5,
+                    "https://download.com/software1",
+                    201,"Windows Antivirus",49.99,null,"Premium antivirus software",100);
+
+            SoftwareLicense s2 = new SoftwareLicense(
+                    "QWE456-RTY111",
+                    LocalDate.of(2026, 12, 31),
+                    1.2,
+                    "https://download.com/software2",
+                    202,
+                    "Photo Editor Pro",79.99,null,"Professional photo editing software",50);
+            
+            // =========================
+            // 🎵 DIGITAL DOWNLOAD OBJECTS
+            // =========================
+
+            // format, downloadLimit, fileSize, downloadLink, id, name,
+            // price, discount, description, quantity
+
+            DigitalDownload d1 = new DigitalDownload(
+                    "MP3",
+                    5,
+                    120.5,
+                    "https://download.com/music_album",
+                    301,"Top Hits Album",19.99,null,"Popular music collection",200);
+
+            DigitalDownload d2 = new DigitalDownload(
+                    "PDF",
+                    3,
+                    15.2,
+                    "https://download.com/java_book",
+                    302,
+                    "Java Programming Guide",29.99,null,"Complete Java learning ebook",80);
+
+            
     }
 }

@@ -3,10 +3,18 @@ package javaproject;
 
 
 public class PercentageDiscount extends Discount {
-
-    @Override
-    double applyDiscount(double price) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     
+    private double percentage;
+   
+    
+    public PercentageDiscount(double percentage) {
+        this.percentage = percentage;
     }
     
+    @Override
+    public double applyDiscount(double price) {
+  
+       return(price-( price*(percentage/100)));
+    }
 }
+

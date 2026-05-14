@@ -3,10 +3,15 @@ package javaproject;
 
 
 public class FlatDiscount extends Discount {
+    private double amount;
 
+    public FlatDiscount(double amount) {
+        this.amount = amount;
+    }
+    
     @Override
-    double applyDiscount(double price) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public double applyDiscount(double price) {
+        return (price-amount);
     }
     
 }

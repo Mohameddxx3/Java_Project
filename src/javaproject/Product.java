@@ -11,7 +11,9 @@ public abstract class Product {
    
     public Product(){}
     
-    public Product(int id, String name, double price, Discount discount, String description, int quantity) {
+    public Product(int id, String name, double price, Discount discount,
+            String description, int quantity) {
+        
         this.id = id;
         this.name = name;
         this.price = price;
@@ -20,12 +22,14 @@ public abstract class Product {
         this.quantity = quantity;
        
     }
-    
-    
-    public abstract double applyDiscount(double price);
-    public abstract double getShippingCost();
-    public abstract String getDescription();
+    public double applyDiscount() {
+
+        if(discount == null)
+            return price;
+
+        return discount.applyDiscount(price);
+    }
+
     public abstract double getFinalPrice();
-   
-    
 }
+    

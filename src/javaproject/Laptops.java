@@ -2,7 +2,7 @@
 package javaproject;
 
 
-public class Laptops extends Electronics {
+public class Laptops extends Electronics  {
     
     protected String ram;
     protected String storage;
@@ -20,22 +20,12 @@ public class Laptops extends Electronics {
         this.processor=processor;
     }
 
-   @Override
-public String toString() {
-    return """
-           Laptop Details:
-           ID: """ + id + "\n" +
-           "Name: " + name + "\n" +
-           "Brand: " + brand + "\n" +
-           "Price: $" + price + "\n" +
-           "Quantity: " + quantity + "\n" +
-           "Description: " + description + "\n" +
-           "Warranty Years: " + warrantyYears + "\n" +
-           "Power Usage: " + powerUsage + "W\n" +
-           "Weight: " + weight + "kg\n" +
-           "Shipping Cost: $" + shippingCost + "\n" +
-           "RAM: " + ram + "\n" +
-           "Storage: " + storage + "\n" +
-           "Processor: " + processor;
-}   
+
+
+    @Override
+    public double calculateTax() {
+    return applyDiscount()*0.05;
+    }
+
+   
 }

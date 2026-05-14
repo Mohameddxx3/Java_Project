@@ -20,20 +20,12 @@ public class Phones extends Electronics {
         this.batteryDetails = batteryDetails;
     }
 
+   
+
     @Override
-    public String toString() {
-        return "Phone Details:\n" +
-               "ID: " + id + "\n" +
-               "Name: " + name + "\n" +
-               "Brand: " + brand + "\n" +
-               "Price: $" + price + "\n" +
-               "Quantity: " + quantity + "\n" +
-               "Description: " + description + "\n" +
-               "Warranty Years: " + warrantyYears + "\n" +
-               "Power Usage: " + powerUsage + "W\n" +
-               "Weight: " + weight + "kg\n" +
-               "Shipping Cost: $" + shippingCost + "\n" +
-               "Camera: " + cameraMp + " MP\n" +
-               "Battery: " + batteryDetails + " mAh";
+    public double calculateTax() {
+    
+        return applyDiscount()*0.04;
+    
     }
 }
