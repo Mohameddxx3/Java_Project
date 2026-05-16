@@ -4,7 +4,7 @@ package javaproject;
 
 public class PercentageDiscount extends Discount {
      
-    private double percentage;
+    protected double percentage;
    
     
     public PercentageDiscount(double percentage) {

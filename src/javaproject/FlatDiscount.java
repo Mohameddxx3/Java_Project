@@ -3,7 +3,7 @@ package javaproject;
 
 
 public class FlatDiscount extends Discount {
-    private double amount;
+    protected double amount;
 
     public FlatDiscount(double amount) {
         this.amount = amount;
