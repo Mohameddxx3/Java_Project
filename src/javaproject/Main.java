@@ -429,16 +429,28 @@ DigitalDownload d2 = new DigitalDownload(
             clearCartBtn.setOnAction(e -> {
                 cartItemsBox.getChildren().clear();
 
-                Label emptyText = new Label("Your cart is empty");
+                // Empty Cart Icon
+
                 Label emptyCart = new Label("🛒");
+
+                emptyCart.setFont(Font.font(60));
+
+                emptyCart.setTextFill(Color.WHITE);
+
+                // Empty Text
+
+                Label emptyText = new Label("Your cart is empty");
+
                 emptyText.setFont(Font.font(18));
 
                 emptyText.setTextFill(Color.web("#d1d5db"));
 
                 // Add Empty Content
 
-                cartItemsBox.getChildren().addAll(emptyCart,emptyText);
-           
+                cartItemsBox.getChildren().addAll(
+                        emptyCart,
+                        emptyText
+            );
             });
 //=============================================================================
             // Add Buttons
