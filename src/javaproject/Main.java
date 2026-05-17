@@ -1,5 +1,6 @@
 package javaproject;
 
+import java.time.LocalDate;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -27,13 +28,141 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class MainFX extends Application {
+public class Main extends Application {
+FlowPane productsPane = new FlowPane();
+ScrollPane scroll = new ScrollPane(productsPane);
+VBox cartItemsBox = new VBox(15);
+//Add product
+           // ================= CLOTHING OBJECTS =================
 
+Clothing c1 = new Clothing(
+        "M", "Black", "Cotton",
+        0.5, 50.0,
+        "Nike", 101, "T-Shirt", 299.99,
+        null,
+        "Comfortable cotton t-shirt",
+        20
+);
+
+Clothing c2 = new Clothing(
+        "L", "Blue", "Denim",
+        1.2, 80.0,
+        "Levi's", 102, "Jeans", 799.99,
+        null,
+        "Classic blue denim jeans",
+        15
+);
+
+// ================= LAPTOP OBJECTS =================
+
+Laptops laptop1 = new Laptops(
+        2, 65, 1.8, 20,
+        "Dell", 1, "XPS 15",
+        1500,
+        null,
+        "High performance laptop",
+        10,
+        "16GB",
+        "512GB SSD",
+        "Intel i7"
+);
+
+Laptops laptop2 = new Laptops(
+        1, 60, 1.6, 25,
+        "Apple", 2, "MacBook Pro",
+        2500,
+        null,
+        "Apple laptop",
+        5,
+        "16GB",
+        "1TB SSD",
+        "M2 Pro"
+);
+
+// ================= PHONE OBJECTS =================
+
+Phones phone1 = new Phones(
+        2, 15, 0.18, 10,
+        "Samsung", 101, "Galaxy S24",
+        1200,
+        null,
+        "Flagship phone",
+        20,
+        50,
+        5000
+);
+
+Phones phone2 = new Phones(
+        1, 12, 0.17, 12,
+        "Apple", 102, "iPhone 15",
+        1300,
+        null,
+        "Apple phone",
+        12,
+        48,
+        4500
+);
+
+// ================= SOFTWARE LICENSE OBJECTS =================
+
+SoftwareLicense s1 = new SoftwareLicense(
+        "ABC123-XYZ789",
+        LocalDate.of(2027, 5, 14),
+        2.5,
+        "https://download.com/software1",
+        201,
+        "Windows Antivirus",
+        49.99,
+        null,
+        "Premium antivirus software",
+        100
+);
+
+SoftwareLicense s2 = new SoftwareLicense(
+        "QWE456-RTY111",
+        LocalDate.of(2026, 12, 31),
+        1.2,
+        "https://download.com/software2",
+        202,
+        "Photo Editor Pro",
+        79.99,
+        null,
+        "Professional photo editing software",
+        50
+);
+
+// ================= DIGITAL DOWNLOAD OBJECTS =================
+
+DigitalDownload d1 = new DigitalDownload(
+        "MP3",
+        5,
+        120.5,
+        "https://download.com/music_album",
+        301,
+        "Top Hits Album",
+        19.99,
+        null,
+        "Popular music collection",
+        200
+);
+
+DigitalDownload d2 = new DigitalDownload(
+        "PDF",
+        3,
+        15.2,
+        "https://download.com/java_book",
+        302,
+        "Java Programming Guide",
+        29.99,
+        null,
+        "Complete Java learning ebook",
+        80
+);
     @Override
     public void start(Stage stage) {
 
         BorderPane root = new BorderPane();
-        // ================= HEADER =================
+    // ================= HEADER ===============================================================================
 
                 HBox header = new HBox();
             header.prefHeightProperty().bind(root.heightProperty().multiply(0.07));
@@ -113,7 +242,7 @@ public class MainFX extends Application {
             colorCycle.setCycleCount(Timeline.INDEFINITE);
             colorCycle.play();
 
-                    // ================= LEFT SIDEBAR =================
+// ================= LEFT SIDEBAR ============================================
   
             VBox sidebar = new VBox(25);
 
@@ -149,7 +278,7 @@ public class MainFX extends Application {
 
             Button clearCartBtn = new Button("🗑 Clear Cart");
 
-            // Button Style
+// Button Style================================================================
 
             String menuStyle = """
                 -fx-background-color: rgba(255,255,255,0.15);
@@ -173,7 +302,7 @@ public class MainFX extends Application {
 
             clearCartBtn.setStyle(menuStyle);
 
-            // Button Width
+// Button Width===============================================================
 
             homeBtn.setMaxWidth(Double.MAX_VALUE);
 
@@ -206,36 +335,112 @@ public class MainFX extends Application {
                         -fx-padding: 12 15 12 15;
                         -fx-cursor: hand;
                     """;
-
-            homeBtn.setOnMouseEntered(e ->
-                    homeBtn.setStyle(onClick));
+//============================================================================
+            homeBtn.setOnMouseEntered(e ->homeBtn.setStyle(onClick));
 
             homeBtn.setOnMouseExited(e -> homeBtn.setStyle(menuStyle));
+            
+            homeBtn.setOnAction(e -> {
 
-            clothesBtn.setOnMouseEntered(e ->
-                    clothesBtn.setStyle(onClick));
+                    productsPane.getChildren().setAll(
+                    createProductCard(laptop1),
+                    createProductCard(laptop2),
+                    createProductCard(phone1),
+                    createProductCard(phone2),
+                    createProductCard(c1),
+                    createProductCard(c2),
+                    createProductCard(s1),
+                    createProductCard(s2),
+                    createProductCard(d1),
+                    createProductCard(d2)
+                    );
+
+
+                    scroll.setContent(productsPane);
+                    root.setCenter(scroll);
+            });
+//====================================================================      
+            clothesBtn.setOnMouseEntered(e ->clothesBtn.setStyle(onClick));
 
             clothesBtn.setOnMouseExited(e -> clothesBtn.setStyle(menuStyle));
+            
+            clothesBtn.setOnAction(e -> {
 
-            laptopsBtn.setOnMouseEntered(e ->
-                    laptopsBtn.setStyle(onClick));
+                    productsPane.getChildren().setAll(
+                    createProductCard(c1),
+                    createProductCard(c2)
+                    );
+
+                    scroll.setContent(productsPane);
+                    root.setCenter(scroll);
+            });
+//============================================================================
+            laptopsBtn.setOnMouseEntered(e ->laptopsBtn.setStyle(onClick));
 
             laptopsBtn.setOnMouseExited(e -> laptopsBtn.setStyle(menuStyle));
+            
+            laptopsBtn.setOnAction(e -> {
 
-            phonesBtn.setOnMouseEntered(e ->
-                    phonesBtn.setStyle(onClick));
+                    productsPane.getChildren().setAll(
+                    createProductCard(laptop1),
+                    createProductCard(laptop2)
+                    );
+
+                    scroll.setContent(productsPane);
+                    root.setCenter(scroll);
+            });
+//============================================================================
+            phonesBtn.setOnMouseEntered(e ->phonesBtn.setStyle(onClick));
 
             phonesBtn.setOnMouseExited(e -> phonesBtn.setStyle(menuStyle));
+            
+           phonesBtn.setOnAction(e -> {
 
-            digitalBtn.setOnMouseEntered(e ->
-                    digitalBtn.setStyle(onClick));digitalBtn.setOnMouseExited(e -> digitalBtn.setStyle(menuStyle));
-                
-            clearCartBtn.setOnMouseEntered(e ->
-                    clearCartBtn.setStyle(delateClick)
-            );
+                productsPane.getChildren().setAll(
+                createProductCard(phone1),
+                createProductCard(phone2)
+                 );
+
+                scroll.setContent(productsPane);
+                root.setCenter(scroll);
+            });
+//=============================================================================         
+            digitalBtn.setOnMouseEntered(e ->digitalBtn.setStyle(onClick));
+            
+            digitalBtn.setOnMouseExited(e -> digitalBtn.setStyle(menuStyle));
+            
+            digitalBtn.setOnAction(e -> {
+
+                productsPane.getChildren().setAll(
+                createProductCard(s1),
+                createProductCard(s2),
+                createProductCard(d1),
+                createProductCard(d2)
+                );
+
+                scroll.setContent(productsPane);
+                root.setCenter(scroll);
+            });
+//=============================================================================
+            clearCartBtn.setOnMouseEntered(e ->clearCartBtn.setStyle(delateClick));
 
             clearCartBtn.setOnMouseExited(e -> clearCartBtn.setStyle(menuStyle));
+            
+            clearCartBtn.setOnAction(e -> {
+                cartItemsBox.getChildren().clear();
 
+                Label emptyText = new Label("Your cart is empty");
+                Label emptyCart = new Label("🛒");
+                emptyText.setFont(Font.font(18));
+
+                emptyText.setTextFill(Color.web("#d1d5db"));
+
+                // Add Empty Content
+
+                cartItemsBox.getChildren().addAll(emptyCart,emptyText);
+           
+            });
+//=============================================================================
             // Add Buttons
 
             sidebar.getChildren().addAll(
@@ -251,7 +456,8 @@ public class MainFX extends Application {
             // Set Left
          
             root.setLeft(sidebar);
-            // ================= RIGHT CART GUI =================
+          
+//================== RIGHT CART GUI============================================
     
             VBox cartPane = new VBox(20);
 
@@ -290,7 +496,7 @@ public class MainFX extends Application {
 
             // Cart Items Box
 
-            VBox cartItemsBox = new VBox(15);
+            cartItemsBox = new VBox(15);
 
             cartItemsBox.setAlignment(Pos.TOP_CENTER);
 
@@ -377,9 +583,8 @@ public class MainFX extends Application {
             // Set Right Side
            
             root.setRight(cartPane);
-             // ================= CENTER PRODUCTS ===========================================================================================
+    // ================= CENTER PRODUCTS ==========================================================================
 
-            FlowPane productsPane = new FlowPane();
             productsPane.setPadding(new Insets(20));
             productsPane.setHgap(20);
             productsPane.setVgap(20);
@@ -388,23 +593,32 @@ public class MainFX extends Application {
             productsPane.setStyle("""
                 -fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
             """);
-            //Add product
-            Laptops laptop = new Laptops(2, 65.0, 2.5,
-                    15.0, "Dell", 1, "Laptop Pro", 1200.0,
-                    null, "Intel i7, 16GB RAM, 512GB SSD",10, "16GB",
-                    "512GB", "Intel i7");
             
-            Phones phone = new Phones(2, 10.0, 0.2,
-                    5.0, "Samsung", 2, "Phone X", 800.0,
-                    new PercentageDiscount(10), "6.7\" AMOLED display, 108MP camera", 10,
-                    108, 5000);
             
-            productsPane.getChildren().addAll(
-                createProductCard(laptop),
-                createProductCard(phone)
-);
+           productsPane.getChildren().addAll(
 
-            ScrollPane scroll = new ScrollPane(productsPane);
+                    // 👕 Clothing
+                    createProductCard(c1),
+                    createProductCard(c2),
+
+                    // 💻 Laptops
+                    createProductCard(laptop1),
+                    createProductCard(laptop2),
+
+                    // 📱 Phones
+                    createProductCard(phone1),
+                    createProductCard(phone2),
+
+                    // 💿 Software Licenses
+                    createProductCard(s1),
+                    createProductCard(s2),
+
+                    // 🎮 Digital Downloads
+                    createProductCard(d1),
+                    createProductCard(d2)
+            );
+
+            scroll = new ScrollPane(productsPane);
             scroll.setFitToWidth(true);
             scroll.setStyle("""
                 -fx-background: #141e30;
@@ -500,22 +714,21 @@ public class MainFX extends Application {
             -fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
         """);
 
-        // icon
+// icon
 //        Label bigIcon = new Label(emoji);
 //        bigIcon.setFont(Font.font(90));
 //        bigIcon.setTextFill(Color.WHITE);
 
-        // Name
+// Name
         Label detailName = new Label(p.name);
         detailName.setFont(Font.font("Arial", 28));
         detailName.setTextFill(Color.WHITE);
 
-        // Rating
-//        Label detailRating = new Label(rating);
-//        detailRating.setFont(Font.font(18));
-//        detailRating.setTextFill(Color.web("#FFAD33"));
-
-        // Description
+// Rating
+// Label detailRating = new Label(rating);
+// detailRating.setFont(Font.font(18));
+// detailRating.setTextFill(Color.web("#FFAD33"));
+// Description
         Label detailDesc = new Label(p.description);
         detailDesc.setTextFill(Color.web("#d1d5db"));
         detailDesc.setFont(Font.font(15));
