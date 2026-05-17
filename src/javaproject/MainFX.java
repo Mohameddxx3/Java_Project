@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -22,10 +23,11 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class MainFx extends Application {
+public class MainFX extends Application {
 
     @Override
     public void start(Stage stage) {
@@ -34,7 +36,9 @@ public class MainFx extends Application {
         // ================= HEADER =================
 
                 HBox header = new HBox();
-            header.prefHeightProperty().bind(root.heightProperty().multiply(0.12));
+            header.prefHeightProperty().bind(root.heightProperty().multiply(0.07));
+            header.setMinHeight(40);
+            header.maxHeightProperty().bind(root.heightProperty().multiply(0.07));
 
             Label title = new Label("E-Commerce Store");
             title.setStyle("""
@@ -115,7 +119,8 @@ public class MainFx extends Application {
 
             sidebar.setPadding(new Insets(25));
 
-            sidebar.prefWidthProperty().bind(root.widthProperty().multiply(0.20));
+            sidebar.prefWidthProperty().bind(root.widthProperty().multiply(0.17));
+            sidebar.setMinWidth(220);
            
             sidebar.setStyle("""
                 -fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
@@ -190,6 +195,7 @@ public class MainFx extends Application {
                         -fx-font-weight: bold;
                         -fx-background-radius: 12;
                         -fx-padding: 12 15 12 15;
+                        -fx-cursor: hand;
                     """;
             String delateClick ="""
                         -fx-background-color: #ff4d4d;
@@ -198,6 +204,7 @@ public class MainFx extends Application {
                         -fx-font-weight: bold;
                         -fx-background-radius: 12;
                         -fx-padding: 12 15 12 15;
+                        -fx-cursor: hand;
                     """;
 
             homeBtn.setOnMouseEntered(e ->
@@ -250,7 +257,8 @@ public class MainFx extends Application {
 
             cartPane.setPadding(new Insets(25));
 
-             cartPane.prefWidthProperty().bind(root.widthProperty().multiply(0.25));
+             cartPane.prefWidthProperty().bind(root.widthProperty().multiply(0.20));
+             cartPane.setMinWidth(250);
 
             cartPane.setStyle("""
                 -fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
@@ -266,10 +274,13 @@ public class MainFx extends Application {
             cartTitle.setFont(Font.font("Arial", 26));
 
             cartTitle.setTextFill(Color.WHITE);
+            
+            cartTitle.setWrapText(true);
+            cartTitle.setMinHeight(Region.USE_PREF_SIZE);
 
             // Line
 
-            Region line = new Region();
+            Separator line = new Separator();
 
             line.setPrefHeight(2);
 
@@ -328,19 +339,19 @@ public class MainFx extends Application {
                 -fx-font-weight: bold;
                 -fx-padding: 14;
                 -fx-background-radius: 15;
-                -fx-cursor: hand;
             """);
 
             // Hover Effect
 
             checkoutBtn.setOnMouseEntered(e ->
                     checkoutBtn.setStyle("""
-                        -fx-background-color: linear-gradient(to right, #43cea2, #185a9d);
+                        -fx-background-color: linear-gradient(to right, #00aadd, #0055cc);
                         -fx-text-fill: white;
                         -fx-font-size: 18px;
                         -fx-font-weight: bold;
                         -fx-padding: 14;
                         -fx-background-radius: 15;
+                        -fx-cursor: hand;
                     """)
             );
 
@@ -366,7 +377,7 @@ public class MainFx extends Application {
             // Set Right Side
            
             root.setRight(cartPane);
-             // ================= CENTER PRODUCTS =================
+             // ================= CENTER PRODUCTS ===========================================================================================
 
             FlowPane productsPane = new FlowPane();
             productsPane.setPadding(new Insets(20));
@@ -378,13 +389,19 @@ public class MainFx extends Application {
                 -fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
             """);
             //Add product
+            Laptops laptop = new Laptops(2, 65.0, 2.5,
+                    15.0, "Dell", 1, "Laptop Pro", 1200.0,
+                    null, "Intel i7, 16GB RAM, 512GB SSD",10, "16GB",
+                    "512GB", "Intel i7");
+            
+            Phones phone = new Phones(2, 10.0, 0.2,
+                    5.0, "Samsung", 2, "Phone X", 800.0,
+                    new PercentageDiscount(10), "6.7\" AMOLED display, 108MP camera", 10,
+                    108, 5000);
+            
             productsPane.getChildren().addAll(
-                createProductCard("Laptop",      "$1200", "💻", "Intel i7, 16GB RAM, 512GB SSD. Perfect for work and gaming.", "⭐️⭐️⭐️⭐️⭐️"),
-                createProductCard("Phone",       "$800",  "📱", "6.7\" AMOLED display, 108MP camera, 5000mAh battery.",        "⭐️⭐️⭐️⭐️"),
-                createProductCard("Headphones",  "$200",  "🎧", "Noise-cancelling, 30hr battery, premium sound quality.",       "⭐️⭐️⭐️⭐️⭐️"),
-                createProductCard("Watch",       "$150",  "⌚️", "Heart rate monitor, GPS, water resistant up to 50m.",          "⭐️⭐️⭐️⭐️"),
-                createProductCard("Tablet",      "$500",  "📟", "10.9\" display, 64GB storage, supports Apple Pencil.",         "⭐️⭐️⭐️⭐️"),
-                createProductCard("Camera",      "$900",  "📷", "24MP sensor, 4K video, interchangeable lens system.",          "⭐️⭐️⭐️⭐️⭐️")
+                createProductCard(laptop),
+                createProductCard(phone)
 );
 
             ScrollPane scroll = new ScrollPane(productsPane);
@@ -392,6 +409,7 @@ public class MainFx extends Application {
             scroll.setStyle("""
                 -fx-background: #141e30;
                 -fx-background-color: #141e30;
+                -fx-border-color: transparent;
             """);
             scroll.prefWidthProperty().bind(
             root.widthProperty()
@@ -402,9 +420,12 @@ public class MainFx extends Application {
             root.setCenter(scroll);
             
         // Scene
-        Scene scene = new Scene(root, 1000, 600);
+        Scene scene = new Scene(root);
 
         stage.setTitle("E-Commerce Product Store");
+        stage.setMinHeight(645);
+        stage.setMinWidth(725);
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }
@@ -412,7 +433,8 @@ public class MainFx extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-   private VBox createProductCard(String name, String price, String emoji, String description, String rating) {
+    
+   private VBox createProductCard(Product p) {
 
     VBox card = new VBox(10);
     card.setPadding(new Insets(15));
@@ -423,61 +445,53 @@ public class MainFx extends Application {
         -fx-background-radius: 15;
         -fx-border-color: rgba(255,255,255,0.15);
         -fx-border-radius: 15;
+        -fx-cursor: hand;
     """);
 
-    Label icon = new Label(emoji);
-    icon.setFont(Font.font(50));
+//    Label icon = new Label(emoji);
+//    icon.setFont(Font.font(50));
 
-    Label nameLabel = new Label(name);
+    Label nameLabel = new Label(p.name);
     nameLabel.setTextFill(Color.WHITE);
-    nameLabel.setFont(Font.font(16));
+    nameLabel.setFont(Font.font(25));
 
-    Label priceLabel = new Label(price);
+    Label priceLabel = new Label("$" + p.getFinalPrice());
     priceLabel.setTextFill(Color.web("#22c55e"));
     priceLabel.setFont(Font.font(14));
 
-    Button addBtn = new Button("Add");
+    Button addBtn = new Button("Add To cart");
     addBtn.setMaxWidth(Double.MAX_VALUE);
     addBtn.setStyle("""
-        -fx-background-color: #22c55e;
+        -fx-background-color: #0d9488;
         -fx-text-fill: white;
         -fx-font-weight: bold;
+        -fx-padding: 12;
         -fx-background-radius: 10;
         -fx-cursor: hand;
     """);
-
-    Button detailsBtn = new Button("Details");
-    detailsBtn.setMaxWidth(Double.MAX_VALUE);
-    detailsBtn.setStyle("""
-        -fx-background-color: rgba(0,198,255,0.3);
+    
+    addBtn.setOnMouseEntered(e -> addBtn.setStyle("""
+        -fx-background-color: #0b7a70 ;
         -fx-text-fill: white;
         -fx-font-weight: bold;
-        -fx-background-radius: 10;
-        -fx-cursor: hand;
-        -fx-border-color: #00c6ff;
-        -fx-border-radius: 10;
-    """);// Hover effects
-    detailsBtn.setOnMouseEntered(e -> detailsBtn.setStyle("""
-        -fx-background-color: #00c6ff;
-        -fx-text-fill: white;
-        -fx-font-weight: bold;
+        -fx-padding: 12;
         -fx-background-radius: 10;
         -fx-cursor: hand;
     """));
-    detailsBtn.setOnMouseExited(e -> detailsBtn.setStyle("""
-        -fx-background-color: rgba(0,198,255,0.3);
+    addBtn.setOnMouseExited(e -> addBtn.setStyle("""
+        -fx-background-color: #0d9488;
         -fx-text-fill: white;
         -fx-font-weight: bold;
+        -fx-padding: 12;
         -fx-background-radius: 10;
-        -fx-cursor: hand;
-        -fx-border-color: #00c6ff;
-        -fx-border-radius: 10;
     """));
 
-    // ── Details Window ──
-    detailsBtn.setOnAction(e -> {
+    // ── Details Window ===================================
+    
+    card.setOnMouseClicked(e -> {
+    
         Stage detailStage = new Stage();
-        detailStage.setTitle(name + " - Details");
+        detailStage.setTitle(p.name + " - Details");
 
         VBox content = new VBox(20);
         content.setPadding(new Insets(40));
@@ -486,41 +500,32 @@ public class MainFx extends Application {
             -fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
         """);
 
-        // Emoji big
-        Label bigIcon = new Label(emoji);
-        bigIcon.setFont(Font.font(90));
-
-        // Fade in icon
-        FadeTransition iconFade = new FadeTransition(Duration.millis(600), bigIcon);
-        iconFade.setFromValue(0);
-        iconFade.setToValue(1);
-        iconFade.play();
+        // icon
+//        Label bigIcon = new Label(emoji);
+//        bigIcon.setFont(Font.font(90));
+//        bigIcon.setTextFill(Color.WHITE);
 
         // Name
-        Label detailName = new Label(name);
+        Label detailName = new Label(p.name);
         detailName.setFont(Font.font("Arial", 28));
         detailName.setTextFill(Color.WHITE);
 
         // Rating
-        Label detailRating = new Label(rating);
-        detailRating.setFont(Font.font(18));
-
-        // Divider
-        Region divider = new Region();
-        divider.setPrefHeight(2);
-        divider.setPrefWidth(300);
-        divider.setStyle("-fx-background-color: rgba(255,255,255,0.2);");
+//        Label detailRating = new Label(rating);
+//        detailRating.setFont(Font.font(18));
+//        detailRating.setTextFill(Color.web("#FFAD33"));
 
         // Description
-        Label detailDesc = new Label(description);
+        Label detailDesc = new Label(p.description);
         detailDesc.setTextFill(Color.web("#d1d5db"));
         detailDesc.setFont(Font.font(15));
         detailDesc.setWrapText(true);
         detailDesc.setMaxWidth(320);
         detailDesc.setAlignment(Pos.CENTER);
+        detailDesc.setTextAlignment(TextAlignment.CENTER);
 
         // Price
-        Label detailPrice = new Label(price);
+        Label detailPrice = new Label("$" + p.getFinalPrice());
         detailPrice.setFont(Font.font("Arial", 32));
         detailPrice.setTextFill(Color.web("#22c55e"));
 
@@ -534,15 +539,15 @@ public class MainFx extends Application {
             -fx-font-weight: bold;
             -fx-padding: 14;
             -fx-background-radius: 15;
-            -fx-cursor: hand;
         """);
         buyBtn.setOnMouseEntered(ev -> buyBtn.setStyle("""
-            -fx-background-color: linear-gradient(to right, #43cea2, #185a9d);
+            -fx-background-color: linear-gradient(to right, #00aadd, #0055cc);
             -fx-text-fill: white;
             -fx-font-size: 16px;
             -fx-font-weight: bold;
             -fx-padding: 14;
             -fx-background-radius: 15;
+            -fx-cursor: hand;
         """));
         buyBtn.setOnMouseExited(ev -> buyBtn.setStyle("""
             -fx-background-color: linear-gradient(to right, #00c6ff, #0072ff);
@@ -555,8 +560,8 @@ public class MainFx extends Application {
         buyBtn.setOnAction(ev -> detailStage.close());
 
         content.getChildren().addAll(
-            bigIcon, detailName, detailRating,
-            divider, detailDesc, detailPrice, buyBtn
+//            bigIcon, detailName, detailRating,
+             detailDesc, detailPrice, buyBtn
         );
 
         Scene detailScene = new Scene(content, 420, 520);
@@ -565,7 +570,7 @@ public class MainFx extends Application {
         detailStage.show();
     });
 
-    card.getChildren().addAll(icon, nameLabel, priceLabel, addBtn, detailsBtn);
+    card.getChildren().addAll( nameLabel, priceLabel, addBtn);
     return card;
 }
 }
