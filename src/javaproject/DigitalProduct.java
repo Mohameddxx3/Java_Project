@@ -9,8 +9,8 @@ public abstract class DigitalProduct extends Product {
 
     public DigitalProduct(double fileSize, String downloadLink, int id,
             String name, double price, Discount discount,
-            String description, int quantity) {
-        super(id, name, price, discount, description, quantity);
+            String description, int quantity ,int rating ,int reviews) {
+        super(id, name, price, discount, description, quantity ,rating,reviews);
         this.fileSize = fileSize;
         this.downloadLink = downloadLink;
     }

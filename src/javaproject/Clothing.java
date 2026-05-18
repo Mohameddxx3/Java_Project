@@ -3,17 +3,15 @@ package javaproject;
 
 public class Clothing extends PhysicalProduct{
     
-    protected String size;
-    protected String color;
-    protected String material;
+    protected String[] sizes;
+    protected String[] colors;
 
-    public Clothing(String size, String color, String material, double weight,
+    public Clothing(String[] sizes, String[] colors,
             double shippingCost, String brand, int id, String name, double price,
-            Discount discount, String description, int quantity) {
-        super(weight, shippingCost, brand, id, name, price, discount, description, quantity);
-        this.size = size;
-        this.color = color;
-        this.material = material;
+            Discount discount, String description, int quantity ,int rating ,int reviews) {
+        super( shippingCost, brand, id, name, price, discount, description, quantity,rating,reviews);
+        this.sizes = sizes;
+        this.colors = colors;
     }
  
 

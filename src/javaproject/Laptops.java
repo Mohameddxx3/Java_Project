@@ -4,20 +4,18 @@ package javaproject;
 
 public class Laptops extends Electronics  {
     
-    protected String ram;
-    protected String storage;
-    protected String processor;
+    protected String[] storages;
+protected String[] rams;
 
-    public Laptops(int warrantyYears, double powerUsage, double weight,
+    public Laptops(
             double shippingCost, String brand, int id, String name, double price
-            , Discount discount, String description, int quantity,String ram,
-            String storage,String processor)
+            , Discount discount, String description, int quantity,int rating ,int reviews,
+            String[] rams,String[] storages )
     {
-        super(warrantyYears, powerUsage, weight, shippingCost, brand, id, name,
-                price, discount, description, quantity);
-        this.ram=ram;
-        this.storage=storage;
-        this.processor=processor;
+        super( shippingCost, brand, id, name,
+                price, discount, description, quantity ,rating,reviews);
+        this.rams=rams;
+        this.storages=storages;
     }
 
 

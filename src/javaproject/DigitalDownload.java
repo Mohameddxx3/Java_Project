@@ -8,8 +8,8 @@ public class DigitalDownload extends DigitalProduct {
     protected int downloadLimit;
 
     public DigitalDownload(String format, int downloadLimit, double fileSize, String downloadLink,
-            int id, String name, double price, Discount discount, String description, int quantity) {
-        super(fileSize, downloadLink, id, name, price, discount, description, quantity);
+            int id, String name, double price, Discount discount, String description, int quantity ,int rating ,int reviews) {
+        super(fileSize, downloadLink, id, name, price, discount, description, quantity,rating,reviews);
         this.format = format;
         this.downloadLimit = downloadLimit;
     }

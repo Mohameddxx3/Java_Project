@@ -5,19 +5,20 @@ package javaproject;
 
 public class Phones extends Electronics {
 
-    protected int cameraMp;
-    protected int batteryDetails;
-
-    public Phones(int warrantyYears, double powerUsage, double weight,
+    protected String[] storages;
+    protected String[] colors;
+    
+    public Phones(String[] storages,String[] colors,
             double shippingCost, String brand, int id, String name,
             double price, Discount discount, String description,
-            int quantity, int cameraMp, int batteryDetails) {
+            int quantity,int rating ,int reviews ) {
 
-        super(warrantyYears, powerUsage, weight, shippingCost, brand,
-                id, name, price, discount, description, quantity);
+        super( shippingCost, brand,
+                id, name, price, discount, description, quantity,rating,reviews);
+        
+        this.storages = storages;
+        this.colors = colors;
 
-        this.cameraMp = cameraMp;
-        this.batteryDetails = batteryDetails;
     }
 
    
