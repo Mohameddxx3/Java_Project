@@ -16,6 +16,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.effect.DropShadow;
@@ -182,7 +183,7 @@ DigitalDownload d2 = new DigitalDownload(
             header.prefHeightProperty().bind(root.heightProperty().multiply(0.07));
             header.setMinHeight(40);
             header.maxHeightProperty().bind(root.heightProperty().multiply(0.07));
-
+            
             Label title = new Label("E-Commerce Store");
             title.setStyle("""
                 -fx-font-size: 32px;
@@ -282,7 +283,21 @@ DigitalDownload d2 = new DigitalDownload(
                 -fx-text-fill: #2563eb;
             """);
 
+            // Search Box
+            TextField searchField = new TextField();
 
+            searchField.setPromptText("Search Product...");
+            searchField.setPrefHeight(40);
+
+            searchField.setStyle("""
+            -fx-background-radius: 10;
+            -fx-font-size: 14px;
+            -fx-padding: 8;
+             """);
+
+searchField.textProperty().addListener((obs, oldVal, newVal) -> {
+    searchProducts(newVal);
+});
             // Buttons
 
             Button homeBtn = new Button("🏠 Home");
@@ -498,6 +513,7 @@ DigitalDownload d2 = new DigitalDownload(
 
             sidebar.getChildren().addAll(
                     logo,
+                    searchField,
                     homeBtn,
                     clothesBtn,
                     laptopsBtn,
@@ -1285,6 +1301,28 @@ DigitalDownload d2 = new DigitalDownload(
     });
 
     card.getChildren().addAll(imageView, nameLabel, priceLabel, addBtn);
-    return card;
+    return card;}
+    //================ Searching =====================================================
+
+   private void searchProducts(String keyword) {
+
+    productsPane.getChildren().clear();
+
+    Product[] allProducts = {
+        c1,c2,
+        laptop1,laptop2,
+        phone1,phone2,
+        s1,s2,
+        d1,d2
+    };
+
+    for(Product p : allProducts){
+
+        if(p.name.toLowerCase().contains(keyword.toLowerCase())){
+            productsPane.getChildren().add(createProductCard(p));
+        }
+
+    }
 }
-}
+   
+   }
